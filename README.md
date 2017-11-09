@@ -17,7 +17,12 @@ go get https://github.com/axetroy/go-fs.git
 import fs "github.com/axetroy/go-fs"
 
 func main(){
-  err := fs.Ensure("./testFile.txt")
+  if err := fs.EnsureFile("./testFile.txt");err !=nill {
+    
+  }
+  if err := fs.Copy("./testFile.txt", "./newTestFile.txt");err !=nil {
+  
+  }
 }
 
 ```
