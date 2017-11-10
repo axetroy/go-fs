@@ -18,7 +18,7 @@ func init() {
 
 func Test_EnsureFile(t *testing.T) {
   var (
-    newFilePath = path.Join(testDir, "testfile.md")
+    newFilePath = path.Join(testDir, "test_ensure.md")
   )
   EnsureFile(newFilePath)
 
@@ -39,7 +39,7 @@ func Test_EnsureDir(t *testing.T) {
   var (
     newDirPath = path.Join(testDir, "testdir")
   )
-  EnsureFile(newDirPath)
+  EnsureDir(newDirPath)
 
   defer func() {
     Remove(newDirPath)
@@ -56,15 +56,20 @@ func Test_EnsureDir(t *testing.T) {
 
 func Test_Copy(t *testing.T) {
   var (
-    filePath    = path.Join(testDir, "testFile.md")
-    newFilePath = path.Join(testDir, "testFile-new.md")
+    filePath    = path.Join(testDir, "test_copy.md")
+    newFilePath = path.Join(testDir, "test_copy_new.md")
   )
   EnsureFile(filePath)
 
   // remove all test file
   defer func() {
-    Remove(filePath)
-    Remove(newFilePath)
+    fmt.Print("remove file", filePath, newFilePath)
+    if err := Remove(filePath); err != nil {
+      panic(err)
+    }
+    if err := Remove(newFilePath); err != nil {
+      panic(err)
+    }
   }()
 
   Copy(filePath, newFilePath)
@@ -85,21 +90,27 @@ func Test_Copy(t *testing.T) {
 
 func Test_Move(t *testing.T) {
   var (
-    filePath    = path.Join(testDir, "testFile.md")
-    newFilePath = path.Join(testDir, "testFile-new.md")
+    filePath    = path.Join(testDir, "test_move.md")
+    newFilePath = path.Join(testDir, "test_mode_new.md")
   )
   EnsureFile(filePath)
 
   // remove dist file
   defer func() {
     Remove(newFilePath)
+    Remove(filePath)
   }()
 
-  Move(filePath, newFilePath)
+  if err := Move(filePath, newFilePath); err != nil {
+    panic(err)
+    t.Error("Move file fail...")
+    return
+  }
 
   // old file should not exist
   if isExist := PathExists(filePath); isExist == true {
     t.Error("Move file Fail.")
+    return
   }
 
   isExist := PathExists(newFilePath)
@@ -134,9 +145,13 @@ func Test_Readdir(t *testing.T) {
 
 func Test_Chmod(t *testing.T) {
   var (
-    newFilePath = path.Join(testDir, "testfile.md")
+    newFilePath = path.Join(testDir, "test_chmod.md")
   )
   EnsureFile(newFilePath)
+
+  defer func() {
+    Remove(newFilePath)
+  }()
 
   Chmod(newFilePath, 0666)
 

@@ -4,6 +4,8 @@ import (
   "os"
   "io"
   "io/ioutil"
+  "time"
+  "math/rand"
 )
 
 /**
@@ -20,8 +22,14 @@ func EnsureDir(dir string) (err error) {
 ensure the file exist
  */
 func EnsureFile(filepath string) (err error) {
+  var (
+    file *os.File
+  )
   if _, err = os.Stat(filepath); os.IsNotExist(err) {
-    _, err = os.Create(filepath)
+    file, err = os.Create(filepath)
+    defer func() {
+      file.Close()
+    }()
   }
   return
 }
@@ -65,6 +73,11 @@ func Copy(src string, target string) (written int64, err error) {
   }
 
   targetFile, err = os.Create(target)
+
+  defer func() {
+    srcFile.Close()
+    targetFile.Close()
+  }()
 
   return io.Copy(targetFile, srcFile)
 }
@@ -116,5 +129,34 @@ func Readdir(dir string) (files []string, err error) {
   for _, f := range fileInfos {
     files = append(files, f.Name())
   }
+  return
+}
+
+// generate random string
+var seededRand *rand.Rand = rand.New(
+  rand.NewSource(time.Now().UnixNano()))
+
+func stringWithCharset(length int, charset string) string {
+  b := make([]byte, length)
+  for i := range b {
+    b[i] = charset[seededRand.Intn(len(charset))]
+  }
+  return string(b)
+}
+
+func randomStr(length int) string{
+  var (
+    lower string = "abcdefghijklmnopqrstuvwxyz"
+    upper string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    num string = "0123456789"
+  )
+  return stringWithCharset(length,lower + upper + num)
+}
+
+/**
+create random temp dir
+ */
+func Mkdtemp(prefix string) (err error) {
+  _, err = ioutil.TempDir(prefix + randomStr(6), prefix)
   return
 }
