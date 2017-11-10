@@ -2,7 +2,6 @@ package fs
 
 import (
   "testing"
-  "fmt"
   "path"
   "os"
 )
@@ -12,7 +11,7 @@ const testDir string = "./.temp"
 func init() {
   err := EnsureDir(testDir)
   if err != nil {
-    fmt.Println(err)
+    panic(err)
   }
 }
 
@@ -63,7 +62,6 @@ func Test_Copy(t *testing.T) {
 
   // remove all test file
   defer func() {
-    fmt.Print("remove file", filePath, newFilePath)
     if err := Remove(filePath); err != nil {
       panic(err)
     }
