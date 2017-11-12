@@ -9,6 +9,14 @@ import (
 )
 
 /**
+create a dir
+ */
+func Mkdir(dir string) (err error) {
+  err = os.Mkdir(dir, os.ModePerm)
+  return
+}
+
+/**
 ensure the dir exist
  */
 func EnsureDir(dir string) (err error) {
@@ -62,6 +70,7 @@ func LStat(name string) (info os.FileInfo, err error) {
 copy a file
  */
 func Copy(src string, target string) (written int64, err error) {
+
   var (
     srcFile    *os.File
     targetFile *os.File
@@ -90,10 +99,10 @@ func Move(src string, target string) (err error) {
 }
 
 /**
-remove a file
+remove a file or a dir
  */
 func Remove(name string) (err error) {
-  return os.Remove(name)
+  return os.RemoveAll(name)
 }
 
 /*
@@ -110,11 +119,18 @@ func ReadFile(filename string) ([]byte, error) {
   return ioutil.ReadFile(filename)
 }
 
+// =========== permission ===========
+
 /**
 change the file permission
  */
 func Chmod(filename string, mode os.FileMode) error {
   return os.Chmod(filename, mode)
+}
+
+func Lchmod(path string, uid int, gid int) (err error) {
+  err = os.Lchown(path, uid, gid)
+  return
 }
 
 /**
@@ -144,19 +160,19 @@ func stringWithCharset(length int, charset string) string {
   return string(b)
 }
 
-func randomStr(length int) string{
+func randomStr(length int) string {
   var (
     lower string = "abcdefghijklmnopqrstuvwxyz"
     upper string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    num string = "0123456789"
+    num   string = "0123456789"
   )
-  return stringWithCharset(length,lower + upper + num)
+  return stringWithCharset(length, lower+upper+num)
 }
 
 /**
 create random temp dir
  */
 func Mkdtemp(prefix string) (err error) {
-  _, err = ioutil.TempDir(prefix + randomStr(6), prefix)
+  _, err = ioutil.TempDir(prefix+randomStr(6), prefix)
   return
 }

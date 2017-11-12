@@ -6,13 +6,33 @@ import (
   "os"
 )
 
-const testDir string = "./.temp"
+const testDir string = ".temp"
 
 func init() {
   err := EnsureDir(testDir)
   if err != nil {
     panic(err)
   }
+}
+
+func Test_CreateDir(t *testing.T) {
+  var (
+    dirPath = path.Join(testDir, "mkdir_test")
+  )
+
+  Mkdir(dirPath)
+
+  defer func() {
+    Remove(dirPath)
+  }()
+
+  isExist := PathExists(dirPath)
+
+  if isExist == false {
+    t.Error("Test Mkdir fail...")
+  }
+
+  t.Log("Test Mkdir success...")
 }
 
 func Test_EnsureFile(t *testing.T) {
