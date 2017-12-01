@@ -4,6 +4,7 @@ import (
   "testing"
   "path"
   "os"
+  "io/ioutil"
 )
 
 const TestDir = ".temp"
@@ -77,5 +78,25 @@ func Test_ReadDir(t *testing.T) {
       t.Error("Readdir Fail.")
       return
     }
+  }
+}
+
+func Test_Mkemp(t *testing.T) {
+  if dir, err := MkTemp("./.temp", "test_temp_dir"); err != nil {
+    t.Errorf("create temp dir fail %v", err.Error())
+    return
+  } else {
+    defer os.RemoveAll(dir)
+    files, err := ioutil.ReadDir(dir)
+    if err != nil {
+      t.Errorf("read temp dir fail %v", err.Error())
+      return
+    }
+
+    if len(files) != 0 {
+      t.Errorf("temp dir should be empty")
+      return
+    }
+
   }
 }

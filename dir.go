@@ -3,8 +3,6 @@ package fs
 import (
   "os"
   "io/ioutil"
-  "time"
-  "math/rand"
 )
 
 /**
@@ -39,30 +37,9 @@ func Readdir(dir string) (files []string, err error) {
   return
 }
 
-// generate random string
-var seededRand = rand.New(rand.NewSource(time.Now().UnixNano()))
-
-func stringWithCharset(length int, charset string) string {
-  b := make([]byte, length)
-  for i := range b {
-    b[i] = charset[seededRand.Intn(len(charset))]
-  }
-  return string(b)
-}
-
-func randomStr(length int) string {
-  var (
-    lower string = "abcdefghijklmnopqrstuvwxyz"
-    upper string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    num   string = "0123456789"
-  )
-  return stringWithCharset(length, lower+upper+num)
-}
-
 /**
 create random temp dir
  */
-func MkTemp(prefix string) (err error) {
-  _, err = ioutil.TempDir(prefix+randomStr(6), prefix)
-  return
+func MkTemp(dir string, prefix string) (string, error) {
+  return ioutil.TempDir(dir, prefix)
 }
