@@ -3,6 +3,8 @@ package fs
 import (
   "os"
   "io/ioutil"
+  "bufio"
+  "io"
 )
 
 /**
@@ -33,4 +35,44 @@ read a file
  */
 func ReadFile(filename string) ([]byte, error) {
   return ioutil.ReadFile(filename)
+}
+
+/**
+Create a read stream
+ */
+func CreateReadStream(path string) (stream io.Reader, err error) {
+  var (
+    file *os.File
+  )
+  if file, err = os.Open(path); err != nil {
+    return
+  }
+
+  defer func() {
+    err = file.Close()
+  }()
+
+  stream = bufio.NewReader(file)
+
+  return
+}
+
+/**
+Create a read stream
+ */
+func CreateWriteStream(path string) (stream io.Writer, err error) {
+  var (
+    file *os.File
+  )
+  if file, err = os.Open(path); err != nil {
+    return
+  }
+
+  defer func() {
+    err = file.Close()
+  }()
+
+  stream = bufio.NewWriter(file)
+
+  return
 }
