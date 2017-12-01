@@ -104,7 +104,7 @@ func Test_PathMoveDir(t *testing.T) {
   }
 
   if srcFileInfo, err = os.Stat(file1); err != nil {
-    t.Error("stat file1 fail %v", err.Error())
+    t.Errorf("stat file1 fail %v", err.Error())
     return
   }
 
