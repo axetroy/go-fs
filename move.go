@@ -4,7 +4,6 @@ import (
   "os"
   "io/ioutil"
   "path"
-  "fmt"
 )
 
 /*
@@ -40,8 +39,6 @@ func Move(src string, target string) (err error) {
         return err
       }
     }
-
-    fmt.Println("remove", src)
 
     // copy all done, should remove the src dir
     err = os.RemoveAll(src)
