@@ -25,8 +25,7 @@ func Copy(src string, target string) (err error) {
 
   if fileInfo.IsDir() {
     // read dir and copy one by one
-    files, err = ioutil.ReadDir(src)
-    if err != nil {
+    if files, err = ioutil.ReadDir(src); err != nil {
       return
     }
 
@@ -44,16 +43,19 @@ func Copy(src string, target string) (err error) {
     }
 
   } else {
-    srcFile, err = os.Open(src)
-
-    if err != nil {
+    if srcFile, err = os.Open(src); err != nil {
       return
     }
 
-    targetFile, err = os.Create(target)
-
     defer func() {
       srcFile.Close()
+    }()
+
+    if targetFile, err = os.Create(target); err != nil {
+      return
+    }
+
+    defer func() {
       targetFile.Close()
     }()
 

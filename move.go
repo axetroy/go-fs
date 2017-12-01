@@ -24,8 +24,7 @@ func Move(src string, target string) (err error) {
   if fileInfo.IsDir() {
 
     // read dir and move one by one
-    files, err = ioutil.ReadDir(src)
-    if err != nil {
+    if files, err = ioutil.ReadDir(src); err != nil {
       return
     }
 

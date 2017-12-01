@@ -70,6 +70,18 @@ func Test_PathCopyFile(t *testing.T) {
   }
 }
 
+func Test_PathCopyFileIfItNotExist(t *testing.T) {
+  var (
+    srcPath  = path.Join(TestDir, "copy_not_exist_test.file1")
+    distPath = path.Join(TestDir, "copy_not_exist_test.file2")
+    err      error
+  )
+  if err = Copy(srcPath, distPath); err == nil {
+    t.Error("Copy an unexist file, it should throw an error")
+    return
+  }
+}
+
 func Test_PathCopyDir(t *testing.T) {
   var (
     srcPath   = path.Join(TestDir, "copy_test_dir1")
