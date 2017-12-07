@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/axetroy/go-fs.svg?branch=master)](https://travis-ci.org/axetroy/go-fs)
 ![License](https://img.shields.io/badge/license-Apache-green.svg)
 [![Coverage Status](https://coveralls.io/repos/github/axetroy/go-fs/badge.svg?branch=master)](https://coveralls.io/github/axetroy/go-fs?branch=master)
-![Size](https://github-size-badge.herokuapp.com/gpmer/gpm.js.svg)
+![Size](https://github-size-badge.herokuapp.com/axetroy/go-fs.svg)
 
 API almost like NodeJs [fs module](http://nodejs.cn/api/fs.html)
 
