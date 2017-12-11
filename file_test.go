@@ -115,3 +115,38 @@ func Test_EnsureFile(t *testing.T) {
   }
 
 }
+
+func Test_AppendFile(t *testing.T) {
+  var (
+    filepath = path.Join(TestDir, "append_test.file")
+    err      error
+    content  = "hello"
+    data     []byte
+  )
+
+  if err = ioutil.WriteFile(filepath, []byte(content), os.ModePerm); err != nil {
+    panic(err)
+    return
+  }
+
+  defer func() {
+    os.RemoveAll(filepath)
+  }()
+
+  if err = AppendFile(filepath, []byte(" world")); err != nil {
+    panic(err)
+  }
+
+  // read file
+  if data, err = ioutil.ReadFile(filepath); err != nil {
+    panic(err)
+  }
+
+  content = string(data[:])
+
+  if content != "hello world" {
+    t.Errorf("append file fail")
+    return
+  }
+
+}

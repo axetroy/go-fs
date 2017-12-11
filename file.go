@@ -37,6 +37,20 @@ func ReadFile(filename string) ([]byte, error) {
   return ioutil.ReadFile(filename)
 }
 
+func AppendFile(file string, data []byte) (error) {
+  if f, err := os.OpenFile(file, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666); err != nil {
+    return err
+  } else {
+    defer func() {
+      err = f.Close()
+    }()
+    if _, err := f.Write(data); err != nil {
+      return err
+    }
+    return nil
+  }
+}
+
 /**
 Create a read stream
  */
