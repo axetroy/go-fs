@@ -1,6 +1,9 @@
 package fs
 
-import "os"
+import (
+  "os"
+  "syscall"
+)
 
 func Link(existingPath string, newPath string) (error) {
   return os.Link(existingPath, newPath)
@@ -12,4 +15,8 @@ func ReadLink(path string) (string, error) {
 
 func Symlink(target string, path string) (error) {
   return os.Symlink(target, path)
+}
+
+func Unlink(path string) (error) {
+  return syscall.Unlink(path)
 }

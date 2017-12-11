@@ -51,6 +51,10 @@ func AppendFile(file string, data []byte) (error) {
   }
 }
 
+func Truncate(path string, len int64) (error) {
+  return os.Truncate(path, len)
+}
+
 /**
 Create a read stream
  */
