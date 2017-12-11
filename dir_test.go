@@ -82,7 +82,7 @@ func Test_ReadDir(t *testing.T) {
 }
 
 func Test_Mkemp(t *testing.T) {
-  if dir, err := MkTemp("./.temp", "test_temp_dir"); err != nil {
+  if dir, err := Mktemp("./.temp", "test_temp_dir"); err != nil {
     t.Errorf("create temp dir fail %v", err.Error())
     return
   } else {

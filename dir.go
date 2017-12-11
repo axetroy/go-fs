@@ -40,6 +40,10 @@ func Readdir(dir string) (files []string, err error) {
 /**
 create random temp dir
  */
-func MkTemp(dir string, prefix string) (string, error) {
+func Mktemp(dir string, prefix string) (string, error) {
   return ioutil.TempDir(dir, prefix)
+}
+
+func Rmdir(path string) (error) {
+  return os.RemoveAll(path)
 }
