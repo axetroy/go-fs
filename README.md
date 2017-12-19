@@ -1,11 +1,11 @@
-## File Accessor For go-lang Inspired by NodeJs fs system
+## File Accessor For Go Inspired by NodeJs fs system
 
 [![Build Status](https://travis-ci.org/axetroy/go-fs.svg?branch=master)](https://travis-ci.org/axetroy/go-fs)
 ![License](https://img.shields.io/badge/license-Apache-green.svg)
 [![Coverage Status](https://coveralls.io/repos/github/axetroy/go-fs/badge.svg?branch=master)](https://coveralls.io/github/axetroy/go-fs?branch=master)
 ![Size](https://github-size-badge.herokuapp.com/axetroy/go-fs.svg)
 
-API almost like NodeJs [fs module](http://nodejs.cn/api/fs.html)
+API almost like NodeJs [fs module](http://nodejs.cn/api/fs.html) and [fs-extra](https://github.com/jprichardson/node-fs-extra)
 
 ## Usage
 
