@@ -5,6 +5,7 @@ import (
   "io/ioutil"
   "bufio"
   "io"
+  "path"
 )
 
 /**
@@ -14,6 +15,11 @@ func EnsureFile(filepath string) (err error) {
   var (
     file *os.File
   )
+  // ensure dir exist
+  if err = EnsureDir(path.Dir(filepath)); err != nil {
+    return err
+  }
+  // ensure file exist
   if _, err = os.Stat(filepath); os.IsNotExist(err) {
     file, err = os.Create(filepath)
     defer func() {
