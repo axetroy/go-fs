@@ -64,6 +64,30 @@ func Test_EnsureDir(t *testing.T) {
 }
 
 /**
+Ensure a dir
+ */
+func Test_EnsureDirIfParentDirNotExist(t *testing.T) {
+  var (
+    dirPath = path.Join(TestDir, "ensure_parent_test_dir/parent/nest")
+    err     error
+  )
+
+  if err = EnsureDir(dirPath); err != nil {
+    t.Errorf("ensure dir fail")
+    return
+  }
+
+  defer func() {
+    Remove(path.Join(TestDir, "ensure_parent_test_dir"))
+  }()
+
+  if _, err := os.Stat(dirPath); os.IsNotExist(err) {
+    t.Errorf("ensure dir fail")
+    return
+  }
+}
+
+/**
 Read dir
  */
 func Test_ReadDir(t *testing.T) {

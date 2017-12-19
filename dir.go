@@ -3,6 +3,7 @@ package fs
 import (
   "os"
   "io/ioutil"
+  "path"
 )
 
 /**
@@ -16,6 +17,12 @@ func Mkdir(dir string) (err error) {
 ensure the dir exist
  */
 func EnsureDir(dir string) (err error) {
+  parent := path.Dir(dir)
+  if _, err = os.Stat(parent); os.IsNotExist(err) {
+    if err = EnsureDir(parent); err != nil {
+      return
+    }
+  }
   if _, err = os.Stat(dir); os.IsNotExist(err) {
     err = os.Mkdir(dir, os.ModePerm)
   }
