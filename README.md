@@ -28,34 +28,36 @@ func main(){
 
 ## Methods
 
-| Method                                       | Description                                  |
-| -------------------------------------------- | -------------------------------------------- |
-| fs.EnsureFile(filepath string)               | Ensure the file exist, if not then create it |
-| fs.WriteFile(filepath string, data []byte)   | Write file                                   |
-| fs.ReadFile(filepath string)                 | Read file                                    |
-| fs.AppendFile(filepath string, data []byte)  | Append data into a file                      |
-| fs.Truncate(filepath string, len int64)      | Truncate the file                            |
-| fs.CreateReadStream(filepath string)         | Create a read stream (Reader)                |
-| fs.CreateWriteStream(filepath string)        | Create a write stream (Writer)               |
-| fs.EnsureDir(dir string)                     | Ensure the dir exist, if not then create it  |
-| fs.Mkdir(dir string)                         | Create a dir                                 |
-| fs.Readdir(dir string)                       | Read a dir                                   |
-| fs.Mktemp(dir string, prefix string)         | Create a temp dir                            |
-| fs.Rmdir(dir string)                         | Remove a dir                                 |
-| fs.Stat(path string)                         | Stat a file/dir                              |
-| fs.LStat(path string)                        | Stat a file/dir                              |
-| fs.Remove(path string)                       | Remove a file/dir                            |
-| fs.PathExists(path string)                   | Check a path is exist or not                 |
-| fs.Link(existingPath string, newPath string) | Link a file                                  |
-| fs.ReadLink(path string)                     | Read link info                               |
-| fs.Symlink(target string, path string)       | Create a Symlink                             |
-| fs.Unlink(path string)                       | Unlink a link                                |
-| fs.Copy(src string, target string)           | Copy a file/dir                              |
-| fs.Move(src string, target string)           | Move a file/dir                              |
-| fs.Chmod(filepath string, mode os.FileMode)  | Change the file/dir's mode                   |
-| fs.LChod(path string, uid int, gid int)      | Change the file/dir's mode                   |
-| fs.ReadJson(filepath string)                 | Read JSON file                               |
-| fs.WriteJson(filepath string, data []byte)   | Write JSON file                              |
+| Method                                       | Description                                                                                 |
+| -------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| fs.EnsureFile(filepath string)               | Ensure the file exist, if not then create it                                                |
+| fs.WriteFile(filepath string, data []byte)   | Write file                                                                                  |
+| fs.ReadFile(filepath string)                 | Read file                                                                                   |
+| fs.AppendFile(filepath string, data []byte)  | Append data into a file                                                                     |
+| fs.Truncate(filepath string, len int64)      | Truncate the file                                                                           |
+| fs.CreateReadStream(filepath string)         | Create a read stream (Reader)                                                               |
+| fs.CreateWriteStream(filepath string)        | Create a write stream (Writer)                                                              |
+| fs.EnsureDir(dir string)                     | Ensure the dir exist, if not then create it                                                 |
+| fs.Mkdir(dir string)                         | Create a dir                                                                                |
+| fs.Readdir(dir string)                       | Read a dir                                                                                  |
+| fs.Mktemp(dir string, prefix string)         | Create a temp dir                                                                           |
+| fs.Rmdir(dir string)                         | Remove a dir                                                                                |
+| fs.Stat(path string)                         | Stat a file/dir                                                                             |
+| fs.LStat(path string)                        | Stat a file/dir                                                                             |
+| fs.Remove(path string)                       | Remove a file/dir                                                                           |
+| fs.PathExists(path string)                   | Check a path is exist or not                                                                |
+| fs.Link(existingPath string, newPath string) | Link a file                                                                                 |
+| fs.ReadLink(path string)                     | Read link info                                                                              |
+| fs.Symlink(target string, path string)       | Create a Symlink                                                                            |
+| fs.Unlink(path string)                       | Unlink a link                                                                               |
+| fs.Copy(src string, target string)           | Copy a file/dir                                                                             |
+| fs.Move(src string, target string)           | Move a file/dir                                                                             |
+| fs.Chmod(filepath string, mode os.FileMode)  | Change the file/dir's mode                                                                  |
+| fs.LChod(path string, uid int, gid int)      | Change the file/dir's mode                                                                  |
+| fs.ReadJson(filepath string)                 | Read JSON file                                                                              |
+| fs.WriteJson(filepath string, data []byte)   | Write JSON file                                                                             |
+| fs.OuputFile(filepath string, data []byte)   | Almost the same as fs.WriteFile, except that if the directory does not exist, it's created. |
+| fs.OuputJson(filepath string, data []byte)   | Almost the same as fs.WriteJson, except that if the directory does not exist, it's created. |
 
 ## Contributing
 
