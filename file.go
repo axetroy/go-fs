@@ -32,15 +32,15 @@ func EnsureFile(filepath string) (err error) {
 /*
 write a file
  */
-func WriteFile(filename string, data []byte) error {
-  return ioutil.WriteFile(filename, data, os.ModePerm)
+func WriteFile(filepath string, data []byte) error {
+  return ioutil.WriteFile(filepath, data, os.ModePerm)
 }
 
 /**
 read a file
  */
-func ReadFile(filename string) ([]byte, error) {
-  return ioutil.ReadFile(filename)
+func ReadFile(filepath string) ([]byte, error) {
+  return ioutil.ReadFile(filepath)
 }
 
 func AppendFile(file string, data []byte) (error) {
@@ -57,18 +57,18 @@ func AppendFile(file string, data []byte) (error) {
   }
 }
 
-func Truncate(path string, len int64) (error) {
-  return os.Truncate(path, len)
+func Truncate(filepath string, len int64) (error) {
+  return os.Truncate(filepath, len)
 }
 
 /**
 Create a read stream
  */
-func CreateReadStream(path string) (stream io.Reader, err error) {
+func CreateReadStream(filepath string) (stream io.Reader, err error) {
   var (
     file *os.File
   )
-  if file, err = os.Open(path); err != nil {
+  if file, err = os.Open(filepath); err != nil {
     return
   }
 
@@ -84,11 +84,11 @@ func CreateReadStream(path string) (stream io.Reader, err error) {
 /**
 Create a read stream
  */
-func CreateWriteStream(path string) (stream io.Writer, err error) {
+func CreateWriteStream(filepath string) (stream io.Writer, err error) {
   var (
     file *os.File
   )
-  if file, err = os.Open(path); err != nil {
+  if file, err = os.Open(filepath); err != nil {
     return
   }
 

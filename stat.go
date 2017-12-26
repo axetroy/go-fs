@@ -5,13 +5,13 @@ import "os"
 /**
 stat a file
  */
-func Stat(name string) (info os.FileInfo, err error) {
-  return os.Stat(name)
+func Stat(path string) (info os.FileInfo, err error) {
+  return os.Stat(path)
 }
 
 /**
 stat a file
  */
-func LStat(name string) (info os.FileInfo, err error) {
-  return os.Lstat(name)
+func LStat(path string) (info os.FileInfo, err error) {
+  return os.Lstat(path)
 }

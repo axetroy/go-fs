@@ -5,8 +5,8 @@ import "os"
 /**
 change the file permission
  */
-func Chmod(filename string, mode os.FileMode) error {
-  return os.Chmod(filename, mode)
+func Chmod(filepath string, mode os.FileMode) error {
+  return os.Chmod(filepath, mode)
 }
 
 func LChod(path string, uid int, gid int) (error) {
