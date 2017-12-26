@@ -4,6 +4,7 @@ import (
   "io/ioutil"
   "encoding/json"
   "os"
+  "path"
 )
 
 func ReadJson(filepath string) (map[string]interface{}, error) {
@@ -28,4 +29,11 @@ func WriteJson(filepath string, data []byte) (error) {
     return err
   }
   return nil
+}
+
+func OuputJson(filepath string, data []byte) error {
+  if err := EnsureDir(path.Dir(filepath)); err != nil {
+    return err
+  }
+  return WriteJson(filepath, data)
 }

@@ -100,3 +100,11 @@ func CreateWriteStream(filepath string) (stream io.Writer, err error) {
 
   return
 }
+
+// Almost the same as writeFile (i.e. it overwrites), except that if the parent directory does not exist, it's created.
+func OuputFile(filepath string, data []byte) error {
+  if err := EnsureDir(path.Dir(filepath)); err != nil {
+    return err
+  }
+  return WriteFile(filepath, data)
+}
